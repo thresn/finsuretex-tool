@@ -3,6 +3,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import csvSplit from "../utils/csvSplit";
 import DetailModal from "../DetailModal";
+import exportToCSV from "../utils/exportToCsv";
 
 
 export default function Page() {
@@ -49,6 +50,10 @@ setSelectedRow(null); // modal kapanır
      <div className="table-wrapper">
       <input type="file" accept=".csv" onChange={handleFile} />
 
+        <button onClick={() => exportToCSV(rows)}>
+          Export CSV
+        </button>
+
 {rows.length > 0 && (
 
       <table className="table">
@@ -70,6 +75,8 @@ setSelectedRow(null); // modal kapanır
     ))}
         </tbody>
 
+
+
       </table>
 
       )}
@@ -80,6 +87,8 @@ setSelectedRow(null); // modal kapanır
         onClose={() => setSelectedRow(null)} 
         onSave={handleSave}
       />
+
+      
       
       
     </div>
