@@ -2,10 +2,12 @@
 
 import React, { ChangeEvent, useState } from "react";
 import csvSplit from "../utils/csvSplit";
+import DetailModal from "../DetailModal";
 
 
 export default function Page() {
     const [rows, setRows] = useState<any[]>([]);
+    const [selectedRow, setSelectedRow] = useState<Record<string, string> | null>(null);//modal için
 
 
     function handleFile(e) {
@@ -42,7 +44,7 @@ export default function Page() {
                             
         <tbody>
             {rows.map((row, i) => (
-              <tr key={i}>
+              <tr key={i} onClick={() => setSelectedRow(row)}>
                  {Object.values(row).map((val, j) => (
                   <td key={j}>{String(val)}</td>
                   ))}
@@ -53,6 +55,12 @@ export default function Page() {
       </table>
 
       )}
+
+      <DetailModal 
+        open={!!selectedRow} 
+        data={selectedRow} 
+        onClose={() => setSelectedRow(null)} 
+      />
       
       
     </div>
