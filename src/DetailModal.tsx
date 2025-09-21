@@ -41,13 +41,13 @@ export default function DetailModal({ open, data, onClose, onSave }: DetailModal
         // içerik kutusu
         onClick={(e) => e.stopPropagation()} // içerikte tıklayınca kapanmasın
         style={{
-          background: "black",
+          background: "blue",
           width: "min(800px, 92vw)",
           maxHeight: "80vh",
           overflow: "auto",
           borderRadius: 12,
           padding: 20,
-          boxShadow: "0 10px 30px rgba(70, 80, 172, 0.2)"
+          boxShadow: "0 10px 30px rgba(38, 56, 220, 0.2)"
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
@@ -55,7 +55,7 @@ export default function DetailModal({ open, data, onClose, onSave }: DetailModal
           <button onClick={onClose} aria-label="Close">✕</button>
         </div>
 
-        {/* İçerik: şimdilik sadece okuma */}
+        
         <div style={{ display: "grid", gridTemplateColumns: "160px 1fr", gap: 8 }}>
           {Object.entries(data).map(([key, value]) => (
 
