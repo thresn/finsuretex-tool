@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import csvSplit from "../utils/csvSplit";
 import DetailModal from "../DetailModal";
 
@@ -9,7 +9,7 @@ export default function Page() {
     const [rows, setRows] = useState<any[]>([]);
     const [selectedRow, setSelectedRow] = useState<Record<string, string> | null>(null);//modal için
 
-
+ 
     function handleFile(e) {
         const file = e.target.files[0]//files arrayınden ilk seçilen file
 
@@ -24,6 +24,24 @@ export default function Page() {
         
         reader.readAsText(file);
     }
+
+
+      function handleSave(updatedRow: Record<string, string>) {
+        
+        setRows(
+          rows.map(r => {
+           
+            if (r.id === updatedRow.id) {
+              return updatedRow;   
+            } else {
+              return r;            
+            }
+
+          })
+        );
+
+setSelectedRow(null); // modal kapanır
+        }
 
     
   return (
@@ -60,6 +78,7 @@ export default function Page() {
         open={!!selectedRow} 
         data={selectedRow} 
         onClose={() => setSelectedRow(null)} 
+        onSave={handleSave}
       />
       
       
