@@ -8,9 +8,11 @@ import exportToCSV from "../utils/exportToCsv";
 export default function Page() {
   const [rows, setRows] = useState<any[]>([]);
   const [selectedRow, setSelectedRow] = useState<Record<string, string> | null>(null);//modal için
+  const [fileName, setFileName] = useState<string>("");
 
   function handleFile(e) {
     const file = e.target.files[0]//files arrayınden ilk seçilen file
+    if (file) setFileName(file.name);
     const reader = new FileReader();
 
     reader.onload = (ev) => {//kaydet,okununca buraya dön(onload)
@@ -37,10 +39,14 @@ export default function Page() {
 
   return (
     <div className="table-wrapper">
-      <input type="file" accept=".csv" onChange={handleFile} />
-      <button onClick={() => exportToCSV(rows)}>
-        Export CSV
-      </button>
+      <div className="actions">
+        <input id="csvFile" className="visuallyHidden" type="file" accept=".csv" onChange={handleFile} />
+        <label htmlFor="csvFile" className="btn accent">Choose CSV</label>
+        <span className="fileName" aria-live="polite">{fileName || "No file selected"}</span>
+        <button className="primary push-right" onClick={() => exportToCSV(rows)}>
+          Export CSV
+        </button>
+      </div>
 
       {rows.length > 0 && (
         <table className="table">
@@ -57,7 +63,9 @@ export default function Page() {
             {rows.map((row) => (
               <tr key={row.id ?? JSON.stringify(row)} onClick={() => setSelectedRow(row)}>
                 {Object.entries(row).map(([colKey, val]) => (
-                  <td key={colKey}>{String(val)}</td>
+                  <td key={colKey}>
+                    <div className="cellClamp" title={String(val)}>{String(val)}</div>
+                  </td>
                 ))}
               </tr>
             ))}
