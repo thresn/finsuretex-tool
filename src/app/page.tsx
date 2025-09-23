@@ -12,11 +12,11 @@ export default function Page() {
   const [query, setQuery] = useState<string>("");
 
   function handleFile(e) {
-    const file = e.target.files[0]//files arrayınden ilk seçilen file
+    const file = e.target.files[0]//selected file from file array
     if (file) setFileName(file.name);
     const reader = new FileReader();
 
-    reader.onload = (ev) => {//kaydet,okununca buraya dön(onload)
+    reader.onload = (ev) => {//save and read the file
       const fileText = ev.target.result as string;
       const data = csvSplit(fileText);
       setRows(data);
@@ -35,7 +35,7 @@ export default function Page() {
         }
       })
     );
-    setSelectedRow(null); // modal kapanır
+    setSelectedRow(null); // modal closed
   }
 
   return (
@@ -68,7 +68,7 @@ export default function Page() {
           </thead>
 
           <tbody>
-            {(() => {
+            {(() => { //search filter 
               let visibleRows = rows;
               if (query) {
                 visibleRows = rows.filter((r) => {
@@ -79,13 +79,13 @@ export default function Page() {
                 });
               }
               return visibleRows.map((row) => (
-              <tr key={row.id ?? JSON.stringify(row)} onClick={() => setSelectedRow(row)}>
-                {Object.entries(row).map(([colKey, val]) => (
-                  <td key={colKey}>
-                    <div className="cellClamp" title={String(val)}>{String(val)}</div>
-                  </td>
-                ))}
-              </tr>
+                <tr key={row.id ?? JSON.stringify(row)} onClick={() => setSelectedRow(row)}>
+                  {Object.entries(row).map(([colKey, val]) => (
+                    <td key={colKey}>
+                      <div className="cellClamp" title={String(val)}>{String(val)}</div>
+                    </td>
+                  ))}
+                </tr>
               ));
             })()}
           </tbody>

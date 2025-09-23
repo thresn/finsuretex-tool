@@ -47,7 +47,6 @@ body {
   margin-left: auto;
 }
 
-/* Search input styling moved from inline */
 .searchInput {
   margin-left: 8px;
   flex: 1;
@@ -67,7 +66,6 @@ button {
   transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
 
-/* Make label look like button */
 .btn {
   display: inline-block;
   border: 1px solid var(--border);
@@ -131,10 +129,11 @@ input[type="file"] {
 
 /* Readable table */
 .table {
-  width: 100%;
+  width: 120%;
   border-collapse: collapse;
   font-size: 14px;
   font-family: inherit;
+  
 }
 
 .table thead th {
@@ -153,6 +152,7 @@ input[type="file"] {
   vertical-align: top;
   line-height: 1.5;
 }
+
 
 /* Clamp long text inside table cells to avoid huge rows */
 .cellClamp {
