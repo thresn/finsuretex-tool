@@ -26,14 +26,14 @@ export default function csvSplit(csvString: string) {
         return result;
     }
 
-    function unquote(value: string): string {
+    function unquote(value: string): string { //remove quotes from the value
         const trimmed = value;
         if (trimmed.length >= 2 && trimmed.startsWith('"') && trimmed.endsWith('"')) {
             return trimmed.slice(1, -1).replace(/""/g, '"');
         }
         return trimmed;
     }
-    
+
     const header = lines[0];
     const newHeader = parseCsvLine(header).map(unquote);
     const values = lines.slice(1);

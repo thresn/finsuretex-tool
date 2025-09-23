@@ -75,7 +75,7 @@ export default function DetailModal({ open, data, onClose, onSave }: DetailModal
     </div>
   );
 
-  return ReactDOM.createPortal(modal, document.body);///bakkkkk
+  return ReactDOM.createPortal(modal, document.body);
 }
 
 
