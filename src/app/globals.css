@@ -47,6 +47,14 @@ body {
   margin-left: auto;
 }
 
+/* Search input styling moved from inline */
+.searchInput {
+  margin-left: 8px;
+  flex: 1;
+  min-width: 120px;
+  max-width: 420px;
+}
+
 /* Buttons */
 button {
   appearance: none;

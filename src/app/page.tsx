@@ -9,6 +9,7 @@ export default function Page() {
   const [rows, setRows] = useState<any[]>([]);
   const [selectedRow, setSelectedRow] = useState<Record<string, string> | null>(null);//modal için
   const [fileName, setFileName] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
 
   function handleFile(e) {
     const file = e.target.files[0]//files arrayınden ilk seçilen file
@@ -43,6 +44,13 @@ export default function Page() {
         <input id="csvFile" className="visuallyHidden" type="file" accept=".csv" onChange={handleFile} />
         <label htmlFor="csvFile" className="btn accent">Choose CSV</label>
         <span className="fileName" aria-live="polite">{fileName || "No file selected"}</span>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="searchInput"
+        />
         <button className="primary push-right" onClick={() => exportToCSV(rows)}>
           Export CSV
         </button>
@@ -60,7 +68,17 @@ export default function Page() {
           </thead>
 
           <tbody>
-            {rows.map((row) => (
+            {(() => {
+              let visibleRows = rows;
+              if (query) {
+                visibleRows = rows.filter((r) => {
+                  const hay = Object.values(r)
+                    .map((v) => String(v).toLowerCase())
+                    .join(" ");
+                  return hay.includes(query.toLowerCase());
+                });
+              }
+              return visibleRows.map((row) => (
               <tr key={row.id ?? JSON.stringify(row)} onClick={() => setSelectedRow(row)}>
                 {Object.entries(row).map(([colKey, val]) => (
                   <td key={colKey}>
@@ -68,7 +86,8 @@ export default function Page() {
                   </td>
                 ))}
               </tr>
-            ))}
+              ));
+            })()}
           </tbody>
 
         </table>
