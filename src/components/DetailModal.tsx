@@ -67,7 +67,7 @@ export default function DetailModal({ open, data, onClose, onSave }: DetailModal
           })}
         </div>
         <div className="modalActions">
-          <button onClick={() => onSave(formData)}>Save</button>
+          <button className="accent" onClick={() => onSave(formData)}>Save</button>
           <button onClick={onClose}>Cancel</button>
         </div>
 
