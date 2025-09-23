@@ -68,13 +68,13 @@ setSelectedRow(null); // modal kapanır
         </thead>
                             
         <tbody>
-            {rows.map((row, i) => (
-              <tr key={i} onClick={() => setSelectedRow(row)}>
-                 {Object.values(row).map((val, j) => (
-                  <td key={j}>{String(val)}</td>
-                  ))}
-               </tr>
-    ))}
+         {rows.map((row) => (
+             <tr key={row.id ?? JSON.stringify(row)} onClick={() => setSelectedRow(row)}>
+                {Object.entries(row).map(([colKey, val]) => (
+                 <td key={colKey}>{String(val)}</td>
+             ))}
+            </tr>
+            ))}
         </tbody>
 
 
