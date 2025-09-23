@@ -13,12 +13,9 @@ export default function DetailModal({ open, data, onClose, onSave }: DetailModal
   const boxRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<Record<string, string>>({});
 
-    useEffect(() => {//data değiştiğinde formData'yı güncelle
+  useEffect(() => {//data değiştiğinde formData'yı güncelle
     if (data) setFormData(data);
-    }, [data]);
-
-    
-  
+  }, [data]);
 
   if (!open || !data) return null;
 
@@ -70,8 +67,8 @@ export default function DetailModal({ open, data, onClose, onSave }: DetailModal
           })}
         </div>
         <div className="modalActions">
-        <button onClick={() => onSave(formData)}>Save</button>
-        <button onClick={onClose}>Cancel</button>
+          <button onClick={() => onSave(formData)}>Save</button>
+          <button onClick={onClose}>Cancel</button>
         </div>
 
       </div>
