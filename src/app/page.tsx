@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, useEffect, useState } from "react";
 import csvSplit from "../utils/csvSplit";
-import DetailModal from "../DetailModal";
+import DetailModal from "../components/DetailModal";
 import exportToCSV from "../utils/exportToCsv";
 
 
@@ -54,10 +54,12 @@ setSelectedRow(null); // modal kapanır
           Export CSV
         </button>
 
+
 {rows.length > 0 && (
 
       <table className="table">
         <thead className="">
+          
          <tr>
             {Object.keys(rows[0]).map((col) => (
              <th key={col}>{col}</th>
